@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion</title>
+    <link rel="stylesheet" href="index.html" />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="connexion.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav__header">
+          <div class="nav__logo">
+            <a href="#">
+              <img src="assets/logo.png" alt="logo" />
+            </a>
+          </div>
+          <div class="nav__menu__btn" id="menu-btn">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="#home">Accueil</a></li>
+          <li><a href="#about">À propos</a></li>
+          <li><a href="#program">Programmes</a></li>
+          <li><a href="#testimonial">Témoignages</a></li>
+          <li>
+            <button class="btn">Se connecter</button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="modal-form" class="modal" style="display: block">
+      <div class="modal-content">
+        <span id="close-modal" style="float: right; cursor: pointer"
+          >&times;</span
+        >
+        <h2>Inscription FITNESXIA</h2>
+        <form id="signup-form">
+          <input
+            type="text"
+            id="name"
+            placeholder="Nom complet"
+            required
+          /><br />
+          <input type="email" id="email" placeholder="Email" required /><br />
+          <input
+            type="password"
+            id="password"
+            placeholder="Mot de passe"
+            required
+          /><br />
+          <button type="submit" class="btn">S'inscrire</button>
+        </form>
+      </div>
+    </div>
+    <div id="welcome-message" class="modal" style="display: none">
+      <div class="modal-content">
+        <h2>Bienvenue dans FITNESXIA !</h2>
+        <p>
+          Votre inscription a été prise en compte. Profitez de nos programmes !
+        </p>
+        <button id="close-welcome" class="btn">Fermer</button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <h4>Entreprise</h4>
+          <ul class="footer__links">
+            <li><a href="#">À propos</a></li>
+            <li><a href="#">Pourquoi nous</a></li>
+            <li><a href="#">Sécurité</a></li>
+            <li><a href="#">Partenariats</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Catégories</h4>
+          <ul class="footer__links">
+            <li><a href="#">Yoga de base</a></li>
+            <li><a href="#">Entraînement de force</a></li>
+            <li><a href="#">Musculation</a></li>
+            <li><a href="#">Perte de poids</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Contactez-nous</h4>
+          <ul class="footer__links">
+            <li>
+              <a href="#">
+                <span><i class="ri-phone-fill"></i></span> +221 78 587 44 72
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="ri-mail-fill"></i></span> FITNESXIA@gmail.com
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="ri-map-pin-2-fill"></i></span> 2456 Rue de la
+                Santé, Dakar, Sénégal
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Abonnez-vous à notre newsletter</h4>
+          <form action="/">
+            <input type="text" placeholder="Entrez votre email" />
+            <button class="btn"><i class="ri-send-plane-fill"></i></button>
+          </form>
+          <p>
+            Ne manquez jamais une mise à jour ou une nouveauté dans votre boîte
+            mail
+          </p>
+        </div>
+      </div>
+      <div class="section__container footer__bar">
+        <a href="#" class="footer__logo">
+          <img src="assets/logo.png" alt="logo" />
+        </a>
+        <p>Copyright © 2025 FITNESXIA. Tous droits réservés.</p>
+        <ul class="footer__socials">
+          <li>
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="ri-instagram-line"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="ri-linkedin-fill"></i></a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+
+    <script>
+      // Sélection des éléments
+      const modalForm = document.getElementById("modal-form");
+      const closeModal = document.getElementById("close-modal");
+      const signupForm = document.getElementById("signup-form");
+      const welcomeMessage = document.getElementById("welcome-message");
+      const closeWelcome = document.getElementById("close-welcome");
+
+      // Ferme le formulaire
+      closeModal.addEventListener("click", function () {
+        modalForm.style.display = "none";
+      });
+
+      // Soumission du formulaire
+      signupForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        modalForm.style.display = "none";
+        welcomeMessage.style.display = "flex";
+      });
+
+      // Ferme le message de bienvenue et redirige vers index.html
+      closeWelcome.addEventListener("click", function () {
+        window.location.href = "index.html";
+      });
+    </script>
+  </body>
+</html>
