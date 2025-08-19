@@ -143,29 +143,115 @@
     </footer>
 
     <script>
-      // Sélection des éléments
-      const modalForm = document.getElementById("modal-form");
-      const closeModal = document.getElementById("close-modal");
-      const signupForm = document.getElementById("signup-form");
-      const welcomeMessage = document.getElementById("welcome-message");
-      const closeWelcome = document.getElementById("close-welcome");
+      // Menu mobile
+        const menuBtn = document.getElementById("menu-btn");
+        const navLinks = document.getElementById("nav-links");
+        
+        menuBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("open");
+        });
+        
+        // Fermer le menu en cliquant sur un lien
+        document.querySelectorAll(".nav__links a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("open");
+            });
+        });
+        
+        // Sélection des éléments
+        const modalForm = document.getElementById("modal-form");
+        const closeModal = document.getElementById("close-modal");
+        const signupForm = document.getElementById("signup-form");
+        const welcomeMessage = document.getElementById("welcome-message");
+        const closeWelcome = document.getElementById("close-welcome");
 
-      // Ferme le formulaire
-      closeModal.addEventListener("click", function () {
-        modalForm.style.display = "none";
-      });
+        // Ferme le formulaire
+        closeModal.addEventListener("click", function () {
+            modalForm.style.display = "none";
+        });
 
-      // Soumission du formulaire
-      signupForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        modalForm.style.display = "none";
-        welcomeMessage.style.display = "flex";
-      });
+        // Ferme le formulaire si on clique en dehors
+        window.addEventListener("click", function(event) {
+            if (event.target === modalForm) {
+                modalForm.style.display = "none";
+            }
+            if (event.target === welcomeMessage) {
+                welcomeMessage.style.display = "none";
+                window.location.href = "index.html";
+            }
+        });
 
-      // Ferme le message de bienvenue et redirige vers index.html
-      closeWelcome.addEventListener("click", function () {
-        window.location.href = "index.html";
-      });
+        // Validation du formulaire
+        signupForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            
+            // Récupération des valeurs
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            
+            // Validation basique
+            if (name.length < 3) {
+                alert("Le nom doit contenir au moins 3 caractères");
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                alert("Veuillez entrer un email valide");
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert("Le mot de passe doit contenir au moins 6 caractères");
+                return;
+            }
+            
+            // Animation de chargement
+            const submitBtn = signupForm.querySelector("button");
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = "Inscription en cours...";
+            submitBtn.disabled = true;
+            
+            // Simulation d'un appel API
+            setTimeout(() => {
+                modalForm.style.display = "none";
+                welcomeMessage.style.display = "flex";
+                
+                // Réinitialiser le formulaire
+                signupForm.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Stocker les informations de l'utilisateur (simulation)
+                localStorage.setItem("userName", name);
+                localStorage.setItem("userEmail", email);
+            }, 1500);
+        });
+
+        // Ferme le message de bienvenue et redirige vers index.html
+        closeWelcome.addEventListener("click", function () {
+            welcomeMessage.style.display = "none";
+            window.location.href = "index.html";
+        });
+
+        // Fonction de validation d'email
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Animation des modals
+        document.querySelectorAll("input").forEach(input => {
+            input.addEventListener("focus", function() {
+                this.parentElement.classList.add("focused");
+            });
+            
+            input.addEventListener("blur", function() {
+                if (this.value === "") {
+                    this.parentElement.classList.remove("focused");
+                }
+            });
+        });
     </script>
   </body>
 </html>
